@@ -2,20 +2,26 @@ package com.ahmadossama.mycalculator;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    public final String Prefs_name = "PreferencesFile";
+    String op = "+";
+    String firstNum ="";
+    double result = 0.0;
     Button btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7,btn8, btn9, addBtn, subBtn,
-            multiplyBtn, divideBtn, dotBtn,equalBtn, clearBtn, delBtn,plusMinusBtn;
+            multiplyBtn, divideBtn, dotBtn,equalBtn, clearBtn, delBtn,plusMinusBtn,
+            memoryPlus,memoryMinus,memoryRecall,memoryClear;
     TextView text;
     float value1, value2;
-    boolean isSub, isAdd,isMul, isDiv;
+    boolean isSub, isAdd,isMul, isDiv, isNew = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         btn7 = findViewById(R.id.b7);
         btn8 = findViewById(R.id.b8);
         btn9 = findViewById(R.id.b9);
+        plusMinusBtn = findViewById(R.id.plusMin);
         addBtn = findViewById(R.id.add);
         subBtn = findViewById(R.id.subtract);
         multiplyBtn = findViewById(R.id.multiply);
@@ -38,6 +45,10 @@ public class MainActivity extends AppCompatActivity {
         dotBtn = findViewById(R.id.dot);
         equalBtn = findViewById(R.id.equal);
         clearBtn = findViewById(R.id.clear);
+        memoryPlus =findViewById(R.id.MPlus);
+        memoryMinus =findViewById(R.id.MMinus);
+        memoryRecall =findViewById(R.id.MR);
+        memoryClear =findViewById(R.id.MC);
         btn0.setOnClickListener(num_listener);
         btn1.setOnClickListener(num_listener);
         btn2.setOnClickListener(num_listener);
@@ -48,105 +59,72 @@ public class MainActivity extends AppCompatActivity {
         btn7.setOnClickListener(num_listener);
         btn8.setOnClickListener(num_listener);
         btn9.setOnClickListener(num_listener);
-        addBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (text == null) {
-                    text.setText("");
-                } else {
-                    value1 = Float.parseFloat(text.getText() + "");
-                    isAdd = true;
-                    text.setText(null);
-                }
-            }
-        });
-        subBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (text == null) {
-                    text.setText("");
-                } else {
-                    value1 = Float.parseFloat(text.getText() + "");
-                    isSub = true;
-                    text.setText(null);
-                }
-                }
-            });
-        multiplyBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (text == null) {
-                    text.setText("");
-                } else {
-                    value1 = Float.parseFloat(text.getText() + "");
-                    isMul = true;
-                    text.setText(null);
-                }
-            }
-        });
-        divideBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (text == null) {
-                    text.setText("");
-                } else {
-                    value1 = Float.parseFloat(text.getText() + "");
-                    isDiv = true;
-                    text.setText(null);
-                }
-            }
-        });
-        equalBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                value2 = Float.parseFloat(text.getText() + "");
-
-                if (isAdd == true) {
-                    text.setText(value1 + value2 + "");
-                    isAdd = false;
-                }
-                else if (isSub == true) {
-                    text.setText(value1 - value2 + "");
-                    isSub = false;
-                }
-                else if (isMul == true) {
-                    text.setText(value1 * value2 + "");
-                    isMul = false;
-                }
-                else if (isDiv == true) {
-                    text.setText(value1 / value2 + "");
-                    isDiv = false;
-                }
-            }
-        });
+        dotBtn.setOnClickListener(num_listener);
+        plusMinusBtn.setOnClickListener(num_listener);
+        equalBtn.setOnClickListener(equal_listener);
+        addBtn.setOnClickListener(operation_listener);
+        subBtn.setOnClickListener(operation_listener);
+        multiplyBtn.setOnClickListener(operation_listener);
+        divideBtn.setOnClickListener(operation_listener);
         clearBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                text.setText("");
+                text.setText("0");
+                isNew = true;
             }
         });
-
+//        memoryPlus.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                SharedPreferences settings = getSharedPreferences(Prefs_name, 0);
+//                SharedPreferences.Editor editor = settings.edit();
+//                editor.putString("value", text.getText().toString());
+//                editor.commit();
+//                name2.setText(settings.getString("name", "Name not found"));
+//                email2.setText(settings.getString("email", "Email not found"));
+//            }
+//        });
     }
-    View.onClickListener operation = new View.OnClickListener(){
-
+    View.OnClickListener operation_listener = new View.OnClickListener(){
         @Override
         public void onClick(View view) {
-            switch (operation){
-
-            }
+            Button opBtn = (Button) view;
+            isNew = true;
+            firstNum = text.getText().toString();
+            op = opBtn.getText().toString();
         }
     };
-     View.OnClickListener num_listener = new View.OnClickListener() {
+
+    View.OnClickListener num_listener = new View.OnClickListener() {
         @Override
-        public void onClick(View ob1) {
-            Button mybtn = (Button) ob1;
-            String result = mybtn.getText().toString();
-            int res = Integer.parseInt(result);
-            Double x = Double.valueOf(result);
-            text.append(result);
-
+        public void onClick(View view) {
+            if(isNew){
+                text.setText("");
+            }
+            isNew = false;
+            Button mybtn = (Button) view;
+            String number = text.getText().toString();
+            if(mybtn == plusMinusBtn){
+                number = "-" + number;
+            }else number += mybtn.getText().toString();
+            text.setText(number);
         }
     };
-
-
+    View.OnClickListener equal_listener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            String secondNum = text.getText().toString();
+            switch (op){
+                case "+":
+                    result = Double.parseDouble(firstNum) + Double.parseDouble(secondNum); break;
+                case "-":
+                    result = Double.parseDouble(firstNum) - Double.parseDouble(secondNum); break;
+                case "x":
+                    result = (Double.parseDouble(firstNum) * Double.parseDouble(secondNum)); break;
+                case "/":
+                    result = (Double.parseDouble(firstNum) / Double.parseDouble(secondNum)); break;
+            }
+            text.setText(result + "");
+        }
+    };
 }
