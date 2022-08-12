@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     public final String Prefs_name = "PreferencesFile";
     String op = "+";
     String firstNum ="";
-    double result = 0.0;
+    double result = 0.0,tempResult= 0.0, memory = 0.0;
     Button btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7,btn8, btn9, addBtn, subBtn,
             multiplyBtn, divideBtn, dotBtn,equalBtn, clearBtn, delBtn,plusMinusBtn,
             memoryPlus,memoryMinus,memoryRecall,memoryClear;
@@ -49,6 +49,10 @@ public class MainActivity extends AppCompatActivity {
         memoryMinus =findViewById(R.id.MMinus);
         memoryRecall =findViewById(R.id.MR);
         memoryClear =findViewById(R.id.MC);
+        memoryPlus.setOnClickListener(memory_listener);
+        memoryMinus.setOnClickListener(memory_listener);
+        memoryRecall.setOnClickListener(memoryRecall_listener);
+        memoryClear.setOnClickListener(memoryClr_listener);
         btn0.setOnClickListener(num_listener);
         btn1.setOnClickListener(num_listener);
         btn2.setOnClickListener(num_listener);
@@ -73,18 +77,61 @@ public class MainActivity extends AppCompatActivity {
                 isNew = true;
             }
         });
-//        memoryPlus.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                SharedPreferences settings = getSharedPreferences(Prefs_name, 0);
-//                SharedPreferences.Editor editor = settings.edit();
-//                editor.putString("value", text.getText().toString());
-//                editor.commit();
-//                name2.setText(settings.getString("name", "Name not found"));
-//                email2.setText(settings.getString("email", "Email not found"));
-//            }
-//        });
     }
+    //Adding and subtracting value from the memory
+    View.OnClickListener memory_listener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            //if display is empty, return and commit nothing to memory
+            if(text.getText().toString().equals("")){
+                return;
+            }
+
+            Button btn = (Button)view;
+            String command = btn.getText().toString();
+            String displayText = text.getText().toString();
+            if(command.equals("M+")){ //add value to memory
+                if(displayText.indexOf("+") != -1 && displayText.indexOf("=") == -1){   //use this case if the output is showing full equation
+                    return;
+                }
+                else if(displayText.indexOf("=")!=-1){ //if a full equation, add tempResult to memory then reset
+                    memory += tempResult;
+                    tempResult = 0;
+                }
+                else{
+                    memory += Double.parseDouble(displayText);
+                }
+            }
+            else{ //subtract value from memory
+                if(displayText.indexOf("+") != -1 && displayText.indexOf("=") == -1){   //use this case if the output is showing full equation
+                    return;
+                }
+                else if(displayText.indexOf("=")!=-1){
+                    memory -= tempResult;
+                    tempResult = 0;
+                }
+                else{
+                    memory -= Double.parseDouble(displayText);
+                }
+            }
+        }
+    };
+    //Retrieve the stored value in the memory
+    View.OnClickListener memoryRecall_listener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            text.setText(memory+"");
+        }
+    };
+    //reset value stored in the memory
+    View.OnClickListener memoryClr_listener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            memory = 0;
+        }
+    };
+    ////////////////////////////////////////////////////////////////////
+    //Operations Button Handler
     View.OnClickListener operation_listener = new View.OnClickListener(){
         @Override
         public void onClick(View view) {
@@ -94,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
             op = opBtn.getText().toString();
         }
     };
-
+    //Numbers Buttons Handler
     View.OnClickListener num_listener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -110,6 +157,7 @@ public class MainActivity extends AppCompatActivity {
             text.setText(number);
         }
     };
+    //Equal Button handler after finishing the equation
     View.OnClickListener equal_listener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
