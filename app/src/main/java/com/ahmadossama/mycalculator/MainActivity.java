@@ -1,27 +1,25 @@
 package com.ahmadossama.mycalculator;
-
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
-
-    public final String Prefs_name = "PreferencesFile";
-    String op = "+";
-    String firstNum ="";
+    String op = "+", firstNum ="";
     double result = 0.0,tempResult= 0.0, memory = 0.0;
-    Button btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7,btn8, btn9, addBtn, subBtn,
-            multiplyBtn, divideBtn, dotBtn,equalBtn, clearBtn, delBtn,plusMinusBtn,
-            memoryPlus,memoryMinus,memoryRecall,memoryClear;
+    Button btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7,btn8, btn9, addBtn, subBtn,multiplyBtn,
+divideBtn, dotBtn,equalBtn, clearBtn, plusMinusBtn, memoryPlus,memoryMinus,memoryRecall,memoryClear;
+    ImageButton delBtn;
     TextView text;
-    float value1, value2;
-    boolean isSub, isAdd,isMul, isDiv, isNew = true;
+    boolean isNew = true;
+    //4 decimal places as maximum format
+    private static final DecimalFormat df = new DecimalFormat("0.0000");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         dotBtn = findViewById(R.id.dot);
         equalBtn = findViewById(R.id.equal);
         clearBtn = findViewById(R.id.clear);
+        delBtn = findViewById(R.id.delete);
         memoryPlus =findViewById(R.id.MPlus);
         memoryMinus =findViewById(R.id.MMinus);
         memoryRecall =findViewById(R.id.MR);
@@ -65,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         btn9.setOnClickListener(num_listener);
         dotBtn.setOnClickListener(num_listener);
         plusMinusBtn.setOnClickListener(num_listener);
+        delBtn.setOnClickListener(del_listener);
         equalBtn.setOnClickListener(equal_listener);
         addBtn.setOnClickListener(operation_listener);
         subBtn.setOnClickListener(operation_listener);
@@ -73,37 +73,41 @@ public class MainActivity extends AppCompatActivity {
         clearBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Reset the value on the text field and the user will enter a new number
+                // so isNew is set = true
                 text.setText("0");
                 isNew = true;
             }
         });
     }
-    //Adding and subtracting value from the memory
+    //Adding and subtracting value from the memory (M+ / M-)
     View.OnClickListener memory_listener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            //if display is empty, return and commit nothing to memory
+            //if display is empty, exit function as nothing will be added to memory
             if(text.getText().toString().equals("")){
                 return;
             }
-
             Button btn = (Button)view;
             String command = btn.getText().toString();
             String displayText = text.getText().toString();
             if(command.equals("M+")){ //add value to memory
-                if(displayText.indexOf("+") != -1 && displayText.indexOf("=") == -1){   //use this case if the output is showing full equation
+                if(displayText.indexOf("+") != -1 && displayText.indexOf("=") == -1){
+                    //use this case if the output is showing full equation
                     return;
                 }
-                else if(displayText.indexOf("=")!=-1){ //if a full equation, add tempResult to memory then reset
+                else if(displayText.indexOf("=")!=-1){
+                    //if a full equation, add tempResult to memory then reset
                     memory += tempResult;
                     tempResult = 0;
                 }
                 else{
                     memory += Double.parseDouble(displayText);
                 }
+                Toast.makeText(MainActivity.this,memory +" is added to the memory",Toast.LENGTH_SHORT).show();
             }
             else{ //subtract value from memory
-                if(displayText.indexOf("+") != -1 && displayText.indexOf("=") == -1){   //use this case if the output is showing full equation
+                if(displayText.indexOf("+") != -1 && displayText.indexOf("=") == -1){
                     return;
                 }
                 else if(displayText.indexOf("=")!=-1){
@@ -113,21 +117,25 @@ public class MainActivity extends AppCompatActivity {
                 else{
                     memory -= Double.parseDouble(displayText);
                 }
+                Toast.makeText(MainActivity.this,memory +" is subtracted to the memory",Toast.LENGTH_SHORT).show();
             }
         }
     };
-    //Retrieve the stored value in the memory
+    //Recall the stored value in the memory (MR)
     View.OnClickListener memoryRecall_listener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             text.setText(memory+"");
+            Toast.makeText(MainActivity.this,memory + " is recalled from the memory",Toast.LENGTH_SHORT).show();
+
         }
     };
-    //reset value stored in the memory
+    //reset value stored in the memory (MC)
     View.OnClickListener memoryClr_listener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             memory = 0;
+            Toast.makeText(MainActivity.this,"Memory is cleared",Toast.LENGTH_SHORT).show();
         }
     };
     ////////////////////////////////////////////////////////////////////
@@ -141,20 +149,29 @@ public class MainActivity extends AppCompatActivity {
             op = opBtn.getText().toString();
         }
     };
-    //Numbers Buttons Handler
+    //All Numbers Buttons Handler
     View.OnClickListener num_listener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            if(isNew){
+            //Check if a new number is entered
+            if (isNew) {
                 text.setText("");
             }
             isNew = false;
             Button mybtn = (Button) view;
-            String number = text.getText().toString();
-            if(mybtn == plusMinusBtn){
-                number = "-" + number;
-            }else number += mybtn.getText().toString();
-            text.setText(number);
+            //Check if zero or dot button is pressed more than one time to prevent exceptions in decimal numbers
+            //avoid writing zeros at the left of the number
+            if ((text.getText().toString().equals("") && mybtn == btn0) || (text.getText().toString().contains(".") && mybtn == dotBtn)) {
+//                isNew = true;
+                return;
+            } else {
+                String number = text.getText().toString();
+                if (mybtn == plusMinusBtn) {
+                    number = "-" + number;
+                }
+                else number += mybtn.getText().toString();
+                text.setText(number);
+            }
         }
     };
     //Equal Button handler after finishing the equation
@@ -162,17 +179,50 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             String secondNum = text.getText().toString();
-            switch (op){
-                case "+":
-                    result = Double.parseDouble(firstNum) + Double.parseDouble(secondNum); break;
-                case "-":
-                    result = Double.parseDouble(firstNum) - Double.parseDouble(secondNum); break;
-                case "x":
-                    result = (Double.parseDouble(firstNum) * Double.parseDouble(secondNum)); break;
-                case "/":
-                    result = (Double.parseDouble(firstNum) / Double.parseDouble(secondNum)); break;
+            if (firstNum.equals("") || op.equals("")) {
+                text.setText(secondNum + "");
+                return;
             }
-            text.setText(result + "");
+            else {
+                switch (op) {
+                    case "+":
+                        result = Double.parseDouble(firstNum) + Double.parseDouble(secondNum);
+                        break;
+                    case "-":
+                        result = Double.parseDouble(firstNum) - Double.parseDouble(secondNum);
+                        break;
+                    case "x":
+                        result = (Double.parseDouble(firstNum) * Double.parseDouble(secondNum));
+                        break;
+                    case "/":
+                        result = (Double.parseDouble(firstNum) / Double.parseDouble(secondNum));
+                        break;
+                }
+                String s = result +"";
+                String[] splitter = s.split("\\.");
+                int before = splitter[0].length();
+                int after = splitter[1].length();
+                //Count number of decimal points in the result and print only 4 digits
+                if(after > 4){
+                text.setText(df.format(result) + "");
+                }
+                else text.setText((result) + "");
+                Toast.makeText(MainActivity.this, firstNum + " " + op + " " + secondNum, Toast.LENGTH_SHORT).show();
+            }
+        }};
+    View.OnClickListener del_listener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+            String currentVal = text.getText().toString();
+            //if text field is empty, do nothing
+            if (currentVal.equals("")) {
+                return;
+            } else {
+                // remove last character
+                String newValue = currentVal.substring(0, currentVal.length() - 1);
+                text.setText(newValue);
+            }
         }
     };
 }
