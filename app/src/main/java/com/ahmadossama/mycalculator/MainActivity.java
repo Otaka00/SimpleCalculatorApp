@@ -8,20 +8,25 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
 
-    public final String Prefs_name = "PreferencesFile";
     String op = "+";
     String firstNum ="";
     double result = 0.0,tempResult= 0.0, memory = 0.0;
     Button btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7,btn8, btn9, addBtn, subBtn,
-            multiplyBtn, divideBtn, dotBtn,equalBtn, clearBtn, delBtn,plusMinusBtn,
+            multiplyBtn, divideBtn, dotBtn,equalBtn, clearBtn, plusMinusBtn,
             memoryPlus,memoryMinus,memoryRecall,memoryClear;
+    ImageButton delBtn;
     TextView text;
-    float value1, value2;
-    boolean isSub, isAdd,isMul, isDiv, isNew = true;
+    //4 decimal places as maximum format
+    private static final DecimalFormat df = new DecimalFormat("0.0000");
+    boolean isNew = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         memoryMinus =findViewById(R.id.MMinus);
         memoryRecall =findViewById(R.id.MR);
         memoryClear =findViewById(R.id.MC);
+        delBtn = findViewById(R.id.delete);
         memoryPlus.setOnClickListener(memory_listener);
         memoryMinus.setOnClickListener(memory_listener);
         memoryRecall.setOnClickListener(memoryRecall_listener);
@@ -65,11 +71,12 @@ public class MainActivity extends AppCompatActivity {
         btn9.setOnClickListener(num_listener);
         dotBtn.setOnClickListener(num_listener);
         plusMinusBtn.setOnClickListener(num_listener);
-        equalBtn.setOnClickListener(equal_listener);
         addBtn.setOnClickListener(operation_listener);
         subBtn.setOnClickListener(operation_listener);
         multiplyBtn.setOnClickListener(operation_listener);
         divideBtn.setOnClickListener(operation_listener);
+        equalBtn.setOnClickListener(equal_listener);
+        delBtn.setOnClickListener(del_listener);
         clearBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -191,11 +198,38 @@ public class MainActivity extends AppCompatActivity {
                         result = (Double.parseDouble(firstNum) / Double.parseDouble(secondNum));
                         break;
                 }
-                text.setText(result + "");
+                String s = result +"";
+                String[] splitter = s.split("\\.");
+                int before = splitter[0].length();
+                int after = splitter[1].length();
+                //Count number of decimal points in the result and print only 4 digits
+                if(after > 4){
+                    text.setText(df.format(result) + "");
+                }
+                else text.setText((result) + "");
+                Toast.makeText(MainActivity.this, firstNum + " " + op + " " + secondNum,
+                        Toast.LENGTH_SHORT).show();
+
             }
         }
     };
+    View.OnClickListener del_listener = new View.OnClickListener() {
+        @Override public void onClick(View view) {
+            String currentVal = text.getText().toString();
+            //if text field is empty, do nothing and exit from the function
+             if (currentVal.equals("")) {
+                 return;
+             }
+             else {
+                 // remove last character
+                 String newValue = currentVal.substring(0, currentVal.length() - 1);
+                 text.setText(newValue);
+             }
+        }
+
+    };
 }
+
 
 
 
