@@ -3,4 +3,6 @@
     <string name="text">Enter a value</string>
     <string name="MR">MR</string>
     <string name="MyCalculator">My Calculator</string>
+    <string name="zero">0</string>
+    <string name="clear">C</string>
 </resources>
