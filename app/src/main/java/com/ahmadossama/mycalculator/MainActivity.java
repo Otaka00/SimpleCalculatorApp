@@ -153,11 +153,19 @@ public class MainActivity extends AppCompatActivity {
             }
             isNew = false;
             Button mybtn = (Button) view;
-            String number = text.getText().toString();
-            if(mybtn == plusMinusBtn){
+            //Check if zero or dot button is pressed more than one time
+            // to prevent exceptions in decimal numbers
+            if ((text.getText().toString().equals("") && mybtn.equals(btn0)) || (text.getText().toString().contains(".") && mybtn == dotBtn)) {
+                // isNew = true;
+                return; }
+            else {
+                String number = text.getText().toString();
+            if(mybtn == plusMinusBtn) {
                 number = "-" + number;
-            }else number += mybtn.getText().toString();
+            }
+            else number += mybtn.getText().toString();
             text.setText(number);
+            }
         }
     };
     //Equal Button handler after finishing the equation
@@ -165,17 +173,31 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             String secondNum = text.getText().toString();
-            switch (op){
-                case "+":
-                    result = Double.parseDouble(firstNum) + Double.parseDouble(secondNum); break;
-                case "-":
-                    result = Double.parseDouble(firstNum) - Double.parseDouble(secondNum); break;
-                case "x":
-                    result = (Double.parseDouble(firstNum) * Double.parseDouble(secondNum)); break;
-                case "/":
-                    result = (Double.parseDouble(firstNum) / Double.parseDouble(secondNum)); break;
+            if (firstNum.equals("") || op.equals("")){
+                text.setText(secondNum + "");
+                return; }
+            else {
+                switch (op) {
+                    case "+":
+                        result = Double.parseDouble(firstNum) + Double.parseDouble(secondNum);
+                        break;
+                    case "-":
+                        result = Double.parseDouble(firstNum) - Double.parseDouble(secondNum);
+                        break;
+                    case "x":
+                        result = (Double.parseDouble(firstNum) * Double.parseDouble(secondNum));
+                        break;
+                    case "/":
+                        result = (Double.parseDouble(firstNum) / Double.parseDouble(secondNum));
+                        break;
+                }
+                text.setText(result + "");
             }
-            text.setText(result + "");
         }
     };
 }
+
+
+
+
+
