@@ -155,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
             Button mybtn = (Button) view;
             //Check if zero or dot button is pressed more than one time
             // to prevent exceptions in decimal numbers
-            if ((text.getText().toString().equals("") && mybtn.equals(btn0)) || (text.getText().toString().contains(".") && mybtn == dotBtn)) {
+            if ((text.getText().toString().equals("") && mybtn.equals(btn0)) || (text.getText().toString().contains(".") && mybtn.equals(dotBtn))) {
                 // isNew = true;
                 return; }
             else {
