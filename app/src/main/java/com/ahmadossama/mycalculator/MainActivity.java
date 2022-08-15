@@ -91,10 +91,12 @@ public class MainActivity extends AppCompatActivity {
             String command = btn.getText().toString();
             String displayText = text.getText().toString();
             if(command.equals("M+")){ //add value to memory
-                if(displayText.indexOf("+") != -1 && displayText.indexOf("=") == -1){   //use this case if the output is showing full equation
+                if(displayText.indexOf("+") != -1 && displayText.indexOf("=") == -1){
+                    //use this case if the output is showing full equation
                     return;
                 }
-                else if(displayText.indexOf("=")!=-1){ //if a full equation, add tempResult to memory then reset
+                else if(displayText.indexOf("=")!=-1){
+                    //if a full equation, add tempResult to memory then reset
                     memory += tempResult;
                     tempResult = 0;
                 }
@@ -103,7 +105,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             else{ //subtract value from memory
-                if(displayText.indexOf("+") != -1 && displayText.indexOf("=") == -1){   //use this case if the output is showing full equation
+                if(displayText.indexOf("+") != -1 && displayText.indexOf("=") == -1){
+                    //use this case if the output is showing full equation
                     return;
                 }
                 else if(displayText.indexOf("=")!=-1){

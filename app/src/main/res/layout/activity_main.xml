@@ -46,7 +46,8 @@
                     android:layout_weight="1"
                     android:background="@drawable/button"
                     android:backgroundTint="#7B8CE1"
-                    android:text="@string/MR" />
+                    android:text="@string/MR"
+                    android:textSize="18sp" />
 
                 <Button
                     android:id="@+id/MPlus"
@@ -57,7 +58,8 @@
                     android:layout_weight="1"
                     android:background="@drawable/button"
                     android:backgroundTint="#7B8CE1"
-                    android:text="M+" />
+                    android:text="M+"
+                    android:textSize="18sp" />
 
                 <Button
                     android:id="@+id/MMinus"
@@ -68,7 +70,8 @@
                     android:layout_weight="1"
                     android:background="@drawable/button"
                     android:backgroundTint="#7B8CE1"
-                    android:text="M-" />
+                    android:text="M-"
+                    android:textSize="18sp" />
 
                 <Button
                     android:id="@+id/MC"
@@ -79,7 +82,8 @@
                     android:layout_weight="1"
                     android:background="@drawable/button"
                     android:backgroundTint="#7B8CE1"
-                    android:text="MC" />
+                    android:text="MC"
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
@@ -99,7 +103,8 @@
                     android:layout_weight="1"
                     android:background="@drawable/button"
                     android:backgroundTint="#7B8CE1"
-                    android:text="C" />
+                    android:text="C"
+                    android:textSize="18sp" />
 
                 <Button
                     android:id="@+id/plusMin"
@@ -110,7 +115,8 @@
                     android:layout_weight="1"
                     android:background="@drawable/button"
                     android:backgroundTint="#7B8CE1"
-                    android:text="+/-" />
+                    android:text="+/-"
+                    android:textSize="18sp" />
 
                 <ImageButton
                     android:id="@+id/imageButton"
@@ -132,7 +138,8 @@
                     android:layout_weight="1"
                     android:background="@drawable/button"
                     android:backgroundTint="#7B8CE1"
-                    android:text="/" />
+                    android:text="/"
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
@@ -151,7 +158,8 @@
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
                     android:background="@drawable/button"
-                    android:text="7" />
+                    android:text="7"
+                    android:textSize="18sp" />
 
                 <Button
                     android:id="@+id/b8"
@@ -161,7 +169,8 @@
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
                     android:background="@drawable/button"
-                    android:text="8" />
+                    android:text="8"
+                    android:textSize="18sp" />
 
                 <Button
                     android:id="@+id/b9"
@@ -171,7 +180,8 @@
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
                     android:background="@drawable/button"
-                    android:text="9" />
+                    android:text="9"
+                    android:textSize="18sp" />
 
                 <Button
                     android:id="@+id/multiply"
@@ -183,7 +193,8 @@
                     android:background="@drawable/button"
                     android:backgroundTint="#7B8CE1"
                     android:text="x"
-                    android:textAllCaps="false" />
+                    android:textAllCaps="false"
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
@@ -202,7 +213,8 @@
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
                     android:background="@drawable/button"
-                    android:text="4" />
+                    android:text="4"
+                    android:textSize="18sp" />
 
                 <Button
                     android:id="@+id/b5"
@@ -212,7 +224,8 @@
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
                     android:background="@drawable/button"
-                    android:text="5" />
+                    android:text="5"
+                    android:textSize="18sp" />
 
                 <Button
                     android:id="@+id/b6"
@@ -222,7 +235,8 @@
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
                     android:background="@drawable/button"
-                    android:text="6" />
+                    android:text="6"
+                    android:textSize="18sp" />
 
                 <Button
                     android:id="@+id/subtract"
@@ -233,7 +247,8 @@
                     android:layout_weight="1"
                     android:background="@drawable/button"
                     android:backgroundTint="#7B8CE1"
-                    android:text="-" />
+                    android:text="-"
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -251,7 +266,8 @@
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
                     android:background="@drawable/button"
-                    android:text="1" />
+                    android:text="1"
+                    android:textSize="18sp" />
 
                 <Button
                     android:id="@+id/b2"
@@ -261,7 +277,8 @@
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
                     android:background="@drawable/button"
-                    android:text="2" />
+                    android:text="2"
+                    android:textSize="18sp" />
 
                 <Button
                     android:id="@+id/b3"
@@ -271,7 +288,8 @@
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
                     android:background="@drawable/button"
-                    android:text="3" />
+                    android:text="3"
+                    android:textSize="18sp" />
 
                 <Button
                     android:id="@+id/add"
@@ -282,7 +300,8 @@
                     android:layout_weight="1"
                     android:background="@drawable/button"
                     android:backgroundTint="#7B8CE1"
-                    android:text="+" />
+                    android:text="+"
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
@@ -302,7 +321,8 @@
                     android:layout_weight="1"
                     android:background="@drawable/button"
                     android:minHeight="48dp"
-                    android:text="0" />
+                    android:text="0"
+                    android:textSize="18sp" />
 
                 <Button
                     android:id="@+id/dot"
@@ -314,7 +334,8 @@
                     android:background="@drawable/button"
                     android:backgroundTint="#7B8CE1"
                     android:minHeight="48dp"
-                    android:text="." />
+                    android:text="."
+                    android:textSize="18sp" />
 
                 <Button
                     android:id="@+id/equal"
@@ -327,7 +348,7 @@
                     android:backgroundTint="#7B8CE1"
                     android:minHeight="48dp"
                     android:text="="
-                    android:textSize="14sp" />
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
