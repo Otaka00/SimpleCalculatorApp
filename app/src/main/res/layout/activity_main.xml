@@ -16,15 +16,14 @@
 
         <TextView
             android:id="@+id/textView"
+            android:textSize="20sp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_margin="12dp"
-            android:layout_weight="0.8"
-            android:hint="0"
-            android:textSize="29sp" />
+            android:layout_weight="1"
+            android:hint="@string/text" />
 
         <LinearLayout
-            android:id="@+id/buttonsLayout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="5"
@@ -47,8 +46,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/button"
                     android:backgroundTint="#7B8CE1"
-                    android:text="@string/MR"
-                    android:textSize="20sp" />
+                    android:text="@string/MR" />
 
                 <Button
                     android:id="@+id/MPlus"
@@ -59,8 +57,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/button"
                     android:backgroundTint="#7B8CE1"
-                    android:text="M+"
-                    android:textSize="20sp" />
+                    android:text="M+" />
 
                 <Button
                     android:id="@+id/MMinus"
@@ -71,8 +68,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/button"
                     android:backgroundTint="#7B8CE1"
-                    android:text="M-"
-                    android:textSize="20sp" />
+                    android:text="M-" />
 
                 <Button
                     android:id="@+id/MC"
@@ -83,8 +79,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/button"
                     android:backgroundTint="#7B8CE1"
-                    android:text="MC"
-                    android:textSize="20sp" />
+                    android:text="MC" />
 
             </LinearLayout>
 
@@ -98,31 +93,29 @@
                 <Button
                     android:id="@+id/clear"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
                     android:background="@drawable/button"
                     android:backgroundTint="#7B8CE1"
-                    android:text="C"
-                    android:textSize="20sp" />
+                    android:text="C" />
 
                 <Button
                     android:id="@+id/plusMin"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
                     android:background="@drawable/button"
                     android:backgroundTint="#7B8CE1"
-                    android:text="+/-"
-                    android:textSize="20sp" />
+                    android:text="+/-" />
 
                 <ImageButton
-                    android:id="@+id/delete"
+                    android:id="@+id/imageButton"
                     android:layout_width="0dp"
-                    android:layout_height="49dp"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
@@ -139,8 +132,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/button"
                     android:backgroundTint="#7B8CE1"
-                    android:text="/"
-                    android:textSize="20sp" />
+                    android:text="/" />
 
             </LinearLayout>
 
@@ -159,8 +151,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
                     android:background="@drawable/button"
-                    android:text="7"
-                    android:textSize="20sp" />
+                    android:text="7" />
 
                 <Button
                     android:id="@+id/b8"
@@ -170,8 +161,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
                     android:background="@drawable/button"
-                    android:text="8"
-                    android:textSize="20sp" />
+                    android:text="8" />
 
                 <Button
                     android:id="@+id/b9"
@@ -181,8 +171,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
                     android:background="@drawable/button"
-                    android:text="9"
-                    android:textSize="20sp" />
+                    android:text="9" />
 
                 <Button
                     android:id="@+id/multiply"
@@ -194,8 +183,7 @@
                     android:background="@drawable/button"
                     android:backgroundTint="#7B8CE1"
                     android:text="x"
-                    android:textAllCaps="false"
-                    android:textSize="20sp" />
+                    android:textAllCaps="false" />
 
             </LinearLayout>
 
@@ -214,8 +202,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
                     android:background="@drawable/button"
-                    android:text="4"
-                    android:textSize="20sp" />
+                    android:text="4" />
 
                 <Button
                     android:id="@+id/b5"
@@ -225,8 +212,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
                     android:background="@drawable/button"
-                    android:text="5"
-                    android:textSize="20sp" />
+                    android:text="5" />
 
                 <Button
                     android:id="@+id/b6"
@@ -236,8 +222,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
                     android:background="@drawable/button"
-                    android:text="6"
-                    android:textSize="20sp" />
+                    android:text="6" />
 
                 <Button
                     android:id="@+id/subtract"
@@ -248,8 +233,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/button"
                     android:backgroundTint="#7B8CE1"
-                    android:text="-"
-                    android:textSize="20sp" />
+                    android:text="-" />
             </LinearLayout>
 
             <LinearLayout
@@ -267,8 +251,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
                     android:background="@drawable/button"
-                    android:text="1"
-                    android:textSize="20sp" />
+                    android:text="1" />
 
                 <Button
                     android:id="@+id/b2"
@@ -278,8 +261,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
                     android:background="@drawable/button"
-                    android:text="2"
-                    android:textSize="20sp" />
+                    android:text="2" />
 
                 <Button
                     android:id="@+id/b3"
@@ -289,8 +271,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
                     android:background="@drawable/button"
-                    android:text="3"
-                    android:textSize="20sp" />
+                    android:text="3" />
 
                 <Button
                     android:id="@+id/add"
@@ -301,8 +282,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/button"
                     android:backgroundTint="#7B8CE1"
-                    android:text="+"
-                    android:textSize="20sp" />
+                    android:text="+" />
 
             </LinearLayout>
 
@@ -314,8 +294,19 @@
                 android:orientation="horizontal">
 
                 <Button
+                    android:id="@+id/b0"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button"
+                    android:minHeight="48dp"
+                    android:text="0" />
+
+                <Button
                     android:id="@+id/dot"
-                    android:layout_width="45dp"
+                    android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="20dp"
@@ -323,20 +314,7 @@
                     android:background="@drawable/button"
                     android:backgroundTint="#7B8CE1"
                     android:minHeight="48dp"
-                    android:text="."
-                    android:textSize="20sp" />
-
-                <Button
-                    android:id="@+id/b0"
-                    android:layout_width="45dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/button"
-                    android:minHeight="48dp"
-                    android:text="0"
-                    android:textSize="20sp" />
+                    android:text="." />
 
                 <Button
                     android:id="@+id/equal"
@@ -349,7 +327,7 @@
                     android:backgroundTint="#7B8CE1"
                     android:minHeight="48dp"
                     android:text="="
-                    android:textSize="20sp" />
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
