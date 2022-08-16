@@ -19,9 +19,8 @@ public class MainActivity extends AppCompatActivity {
     String op = "+";
     String firstNum ="";
     double result = 0.0,tempResult= 0.0, memory = 0.0;
-    Button btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7,btn8, btn9, addBtn, subBtn,
-            multiplyBtn, divideBtn, dotBtn,equalBtn, clearBtn, plusMinusBtn,
-            memoryPlus,memoryMinus,memoryRecall,memoryClear;
+    Button btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7,btn8, btn9, addBtn, subBtn, multiplyBtn,
+    divideBtn,dotBtn,equalBtn,clearBtn,plusMinusBtn,memoryPlus,memoryMinus,memoryRecall,memoryClear;
     ImageButton delBtn;
     TextView text;
     //3 decimal places as maximum format
@@ -89,15 +88,15 @@ public class MainActivity extends AppCompatActivity {
     View.OnClickListener memory_listener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            //if display is empty, return and commit nothing to memory
+            //if displayed text is empty, return without adding nothing to memory
             if(text.getText().toString().equals("")){
                 return;
             }
-
             Button btn = (Button)view;
             String command = btn.getText().toString();
             String displayText = text.getText().toString();
-            if(command.equals("M+")){ //add value to memory
+            if(command.equals("M+")){
+                //Add value to memory
                 if(displayText.indexOf("+") != -1 && displayText.indexOf("=") == -1){
                     //use this case if the output is showing full equation
                     return;
@@ -110,8 +109,11 @@ public class MainActivity extends AppCompatActivity {
                 else{
                     memory += Double.parseDouble(displayText);
                 }
+                Toast.makeText(MainActivity.this,
+                        memory +" is added to the memory",Toast.LENGTH_SHORT).show();
             }
-            else{ //subtract value from memory
+            else{
+                //Subtract value from memory
                 if(displayText.indexOf("+") != -1 && displayText.indexOf("=") == -1){
                     //use this case if the output is showing full equation
                     return;
@@ -121,7 +123,10 @@ public class MainActivity extends AppCompatActivity {
                     tempResult = 0;
                 }
                 else{memory -= Double.parseDouble(displayText);}
+                Toast.makeText(MainActivity.this,
+                        memory +" is subtracted from the memory",Toast.LENGTH_SHORT).show();
             }
+
         }
     };
     //Retrieve the stored value in the memory
@@ -129,6 +134,8 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             text.setText(memory+"");
+            Toast.makeText(MainActivity.this,
+                    memory +" is recalled from the memory",Toast.LENGTH_SHORT).show();
         }
     };
     //reset value stored in the memory
@@ -136,6 +143,8 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             memory = 0;
+            Toast.makeText(MainActivity.this,
+                    "Memory is cleared" ,Toast.LENGTH_SHORT).show();
         }
     };
     ////////////////////////////////////////////////////////////////////
@@ -154,24 +163,27 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             Button mybtn = (Button) view;
+            //If dot button is clicked at the start of the text field zero will not be cleared
             if(text.getText().toString().equals("0") && mybtn.equals(dotBtn)){
                 String number = text.getText().toString();
                 number += mybtn.getText().toString();
                 text.setText(number);
                 return;
             }
-            //If dot button is clicked at the start of the text field zero will not be cleared
+            //if new operand is typed text field is reset and isNew boolean value will be changed
                 if (isNew) {
                     text.setText("");
                 }
                 isNew = false;
-                //Check if zero or dot button is pressed more than one time
-                // to prevent exceptions in decimal numbers
-                if ((text.getText().toString().equals("0") && mybtn.equals(btn0)) || (text.getText().toString().contains(".") && mybtn.equals(dotBtn))) {
+                //Prevent zero or dot button from being pressed more than one time
+                // to prevent exceptions in decimal numbers by escaping the function
+                if ((text.getText().toString().equals("0") && mybtn.equals(btn0))
+                        || (text.getText().toString().contains(".") && mybtn.equals(dotBtn))) {
                     return;
                 } else {
                     String number = text.getText().toString();
                     if (mybtn == plusMinusBtn) {
+                       // Check if the number is already negative to remove the sign or add it
                         if (isMinus) {
                             number = "-" + number;
                             isMinus = false;
