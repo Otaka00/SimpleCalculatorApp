@@ -40,7 +40,7 @@
                 <Button
                     android:id="@+id/MR"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
@@ -52,7 +52,7 @@
                 <Button
                     android:id="@+id/MPlus"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
@@ -64,7 +64,7 @@
                 <Button
                     android:id="@+id/MMinus"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
@@ -76,7 +76,7 @@
                 <Button
                     android:id="@+id/MC"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
@@ -132,7 +132,7 @@
                 <Button
                     android:id="@+id/divide"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
@@ -192,7 +192,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/button"
                     android:backgroundTint="#7B8CE1"
-                    android:text="@string/multiply"
+                    android:text="x"
                     android:textAllCaps="false"
                     android:textSize="18sp" />
 
