@@ -170,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
                 text.setText(number);
                 return;
             }
-            //if new operand is typed text field is reset and isNew boolean value will be changed
+            //if new operand is typed, text field is reset and isNew boolean value will be switched
                 if (isNew) {
                     text.setText("");
                 }
@@ -217,7 +217,6 @@ public class MainActivity extends AppCompatActivity {
                         result = (Double.parseDouble(firstNum) / Double.parseDouble(secondNum));
                         break;
                 }
-
                 String s = result +"";
                 if(s.equals("Infinity")){
                     //If result value is infinity, just print it and exit the function
