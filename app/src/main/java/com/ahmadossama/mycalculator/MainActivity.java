@@ -176,11 +176,11 @@ public class MainActivity extends AppCompatActivity {
                 }
                 isNew = false;
                 //Prevent zero or dot button from being pressed more than one time
-                // to prevent exceptions in decimal numbers by escaping the function
-                if ((text.getText().toString().equals("0") && mybtn.equals(btn0))
-                        || (text.getText().toString().contains(".") && mybtn.equals(dotBtn))) {
-                    return;
-                } else {
+                //to prevent exceptions in decimal numbers by escaping the function
+                if ((text.getText().toString().equals("0") && mybtn.equals(btn0)) ||
+                        (text.getText().toString().contains(".") && mybtn.equals(dotBtn))) {
+                    return;}
+                else {
                     String number = text.getText().toString();
                     if (mybtn == plusMinusBtn) {
                         // Check if the number is not -ve to add the sign and remove it if -ve
@@ -220,6 +220,8 @@ public class MainActivity extends AppCompatActivity {
 
                 String s = result +"";
                 if(s.equals("Infinity")){
+                    //If result value is infinity, just print it and exit the function
+                    //Infinity value could not be rounded
                     text.setText((result) + "");
                     Toast.makeText(MainActivity.this, firstNum + " " + op + " " +
                                     secondNum + " : undefined", Toast.LENGTH_SHORT).show();
