@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     TextView text;
     //3 decimal places as maximum format
     private static final DecimalFormat df = new DecimalFormat("0.000");
-    boolean isNew, isMinus = true;
+    boolean isNew = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -183,16 +183,13 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     String number = text.getText().toString();
                     if (mybtn == plusMinusBtn) {
-                       // Check if the number is already negative to remove the sign or add it
-                        if (isMinus) {
+                        // Check if the number is not -ve to add the sign and remove it if -ve
+                        if (!number.startsWith("-"))
                             number = "-" + number;
-                            isMinus = false;
-                        } else {
+                        else
                             number = number.substring(1);
-                            isMinus = true;
-                        }
-
-                    } else number += mybtn.getText().toString();
+                    }
+                    else number += mybtn.getText().toString();
                     text.setText(number);
                 }
             }
