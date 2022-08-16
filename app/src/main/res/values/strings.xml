@@ -1,6 +1,7 @@
 <resources>
     <string name="MyCalculator">My Calculator</string>
     <string name="app_name">MyCalculator</string>
+    <string name="textField">Enter a value</string>
     <string name="plusMinus">+/-</string>
     <string name="MR">MR</string>
     <string name="MC">MC</string>

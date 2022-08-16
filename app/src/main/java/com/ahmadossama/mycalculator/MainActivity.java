@@ -24,9 +24,9 @@ public class MainActivity extends AppCompatActivity {
             memoryPlus,memoryMinus,memoryRecall,memoryClear;
     ImageButton delBtn;
     TextView text;
-    //4 decimal places as maximum format
-    private static final DecimalFormat df = new DecimalFormat("0.0000");
-    boolean isNew = true;
+    //3 decimal places as maximum format
+    private static final DecimalFormat df = new DecimalFormat("0.000");
+    boolean isNew, isMinus = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         clearBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                text.setText("0");
+                text.setText("");
                 isNew = true;
             }
         });
@@ -120,9 +120,7 @@ public class MainActivity extends AppCompatActivity {
                     memory -= tempResult;
                     tempResult = 0;
                 }
-                else{
-                    memory -= Double.parseDouble(displayText);
-                }
+                else{memory -= Double.parseDouble(displayText);}
             }
         }
     };
@@ -155,25 +153,37 @@ public class MainActivity extends AppCompatActivity {
     View.OnClickListener num_listener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            if(isNew){
-                text.setText("");
-            }
-            isNew = false;
             Button mybtn = (Button) view;
-            //Check if zero or dot button is pressed more than one time
-            // to prevent exceptions in decimal numbers
-            if ((text.getText().toString().equals("") && mybtn.equals(btn0)) || (text.getText().toString().contains(".") && mybtn.equals(dotBtn))) {
-                // isNew = true;
-                return; }
-            else {
+            if(text.getText().toString().equals("0") && mybtn.equals(dotBtn)){
                 String number = text.getText().toString();
-            if(mybtn == plusMinusBtn) {
-                number = "-" + number;
+                number += mybtn.getText().toString();
+                text.setText(number);
+                return;
             }
-            else number += mybtn.getText().toString();
-            text.setText(number);
+            //If dot button is clicked at the start of the text field zero will not be cleared
+                if (isNew) {
+                    text.setText("");
+                }
+                isNew = false;
+                //Check if zero or dot button is pressed more than one time
+                // to prevent exceptions in decimal numbers
+                if ((text.getText().toString().equals("0") && mybtn.equals(btn0)) || (text.getText().toString().contains(".") && mybtn.equals(dotBtn))) {
+                    return;
+                } else {
+                    String number = text.getText().toString();
+                    if (mybtn == plusMinusBtn) {
+                        if (isMinus) {
+                            number = "-" + number;
+                            isMinus = false;
+                        } else {
+                            number = number.substring(1);
+                            isMinus = true;
+                        }
+
+                    } else number += mybtn.getText().toString();
+                    text.setText(number);
+                }
             }
-        }
     };
     //Equal Button handler after finishing the equation
     View.OnClickListener equal_listener = new View.OnClickListener() {
@@ -198,18 +208,23 @@ public class MainActivity extends AppCompatActivity {
                         result = (Double.parseDouble(firstNum) / Double.parseDouble(secondNum));
                         break;
                 }
+
                 String s = result +"";
+                if(s.equals("Infinity")){
+                    text.setText((result) + "");
+                    Toast.makeText(MainActivity.this, firstNum + " " + op + " " +
+                                    secondNum + " : undefined", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 String[] splitter = s.split("\\.");
-                int before = splitter[0].length();
                 int after = splitter[1].length();
                 //Count number of decimal points in the result and print only 4 digits
-                if(after > 4){
+                if(after > 3){
                     text.setText(df.format(result) + "");
                 }
                 else text.setText((result) + "");
                 Toast.makeText(MainActivity.this, firstNum + " " + op + " " + secondNum,
                         Toast.LENGTH_SHORT).show();
-
             }
         }
     };
@@ -229,9 +244,3 @@ public class MainActivity extends AppCompatActivity {
 
     };
 }
-
-
-
-
-
-
