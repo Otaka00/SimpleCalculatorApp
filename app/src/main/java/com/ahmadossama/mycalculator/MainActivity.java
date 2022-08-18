@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
                     memory -= tempResult;
                     tempResult = 0;
                 }
-                else{memory -= Double.parseDouble(displayText);}
+                else memory -= Double.parseDouble(displayText);
                 Toast.makeText(MainActivity.this,
                         memory +" is subtracted from the memory",Toast.LENGTH_SHORT).show();
             }
