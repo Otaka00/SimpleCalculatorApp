@@ -278,4 +278,11 @@ public class MainActivity extends AppCompatActivity {
              }
         }
     };
+    public void piExp(View view) {
+        Button charBtn = (Button) view;
+        if (piBtn.equals(charBtn)) {
+            text.setText("3.1415926535897");
+        }
+        else text.setText("2.17182818284590452353602874713");
+    }
 }
