@@ -315,7 +315,7 @@
 
                 <Button
                     android:id="@+id/dot"
-                    android:layout_width="50dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="20dp"
@@ -328,7 +328,7 @@
 
                 <Button
                     android:id="@+id/b0"
-                    android:layout_width="50dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="20dp"
@@ -339,16 +339,29 @@
                     android:textSize="18sp" />
 
                 <Button
-                    android:id="@+id/equal"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/power"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="20dp"
-                    android:layout_weight="2"
+                    android:layout_weight="1"
                     android:background="@drawable/button"
                     android:backgroundTint="#7B8CE1"
+                    android:text="^"
+                    android:textSize="18sp" />
+
+                <Button
+                    android:id="@+id/equal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button"
+                    android:backgroundTint="#000000"
                     android:minHeight="48dp"
                     android:text="@string/equal"
+                    android:textColor="#FFFFFF"
                     android:textSize="18sp" />
 
             </LinearLayout>

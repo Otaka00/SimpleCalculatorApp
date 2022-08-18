@@ -1,7 +1,5 @@
 package com.ahmadossama.mycalculator;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -26,9 +24,10 @@ public class MainActivity extends AppCompatActivity {
     String firstNum ="";
     double result = 0.0,tempResult= 0.0, memory = 0.0;
     Button btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7,btn8, btn9, addBtn, subBtn, multiplyBtn,
-    divideBtn,dotBtn,equalBtn,clearBtn,plusMinusBtn,memoryPlus,memoryMinus,memoryRecall,memoryClear;
+            powerBtn,divideBtn,dotBtn,equalBtn,clearBtn,plusMinusBtn,
+            memoryPlus,memoryMinus,memoryRecall,memoryClear;
     ImageButton delBtn;
-    Button piBtn;
+    Button piBtn,expBtn;
     TextView text;
     //3 decimal places as maximum format
     private static final DecimalFormat df = new DecimalFormat("0.000");
@@ -37,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //Each button and text field takes the value from the id by linking this code to the xml code
+    //Each button and text field takes the value from the id by linking this code to the xml code
         text = findViewById(R.id.textView);
         btn0 = findViewById(R.id.b0);
         btn1 = findViewById(R.id.b1);
@@ -54,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         subBtn = findViewById(R.id.subtract);
         multiplyBtn = findViewById(R.id.multiply);
         divideBtn = findViewById(R.id.divide);
+        powerBtn = findViewById(R.id.power);
         dotBtn = findViewById(R.id.dot);
         equalBtn = findViewById(R.id.equal);
         clearBtn = findViewById(R.id.clear);
@@ -62,7 +62,8 @@ public class MainActivity extends AppCompatActivity {
         memoryRecall =findViewById(R.id.MR);
         memoryClear =findViewById(R.id.MC);
         delBtn = findViewById(R.id.delete);
-        piBtn = findViewById(R.id.pi);
+//        piBtn = findViewById(R.id.pi);
+//        expBtn = findViewById(R.id.exponential);
         memoryPlus.setOnClickListener(memory_listener);
         memoryMinus.setOnClickListener(memory_listener);
         memoryRecall.setOnClickListener(memoryRecall_listener);
@@ -77,18 +78,15 @@ public class MainActivity extends AppCompatActivity {
         btn7.setOnClickListener(num_listener);
         btn8.setOnClickListener(num_listener);
         btn9.setOnClickListener(num_listener);
-        piBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
+//        piBtn.setOnClickListener(value_listener);
+//        expBtn.setOnClickListener(value_listener);
         dotBtn.setOnClickListener(num_listener);
         plusMinusBtn.setOnClickListener(num_listener);
         addBtn.setOnClickListener(operation_listener);
         subBtn.setOnClickListener(operation_listener);
         multiplyBtn.setOnClickListener(operation_listener);
         divideBtn.setOnClickListener(operation_listener);
+        powerBtn.setOnClickListener(operation_listener);
         equalBtn.setOnClickListener(equal_listener);
         delBtn.setOnClickListener(del_listener);
         clearBtn.setOnClickListener(new View.OnClickListener() {
@@ -99,6 +97,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    View.OnClickListener value_listener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+           Button charBtn = (Button) view;
+            if (piBtn.equals(charBtn)) {
+                text.setText("3.1415926535897");
+            }
+            else text.setText("2.17182818284590452353602874713");
+        }
+    };
     //Adding and subtracting value from the memory
     View.OnClickListener memory_listener = new View.OnClickListener() {
         @Override
@@ -269,6 +277,5 @@ public class MainActivity extends AppCompatActivity {
                  text.setText(newValue);
              }
         }
-
     };
 }
