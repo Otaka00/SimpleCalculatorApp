@@ -2,15 +2,24 @@ package com.ahmadossama.mycalculator;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+import static java.lang.Math.sqrt;
+import static java.lang.Math.abs;
+import static java.lang.Math.log;
+import static java.lang.Math.exp;
+import static java.lang.Math.toRadians;
+import static java.lang.Math.toDegrees;
+import static java.lang.Math.sin;
+import static java.lang.Math.abs;
+import static java.lang.Math.log10;
+
+
 
 import java.text.DecimalFormat;
 
@@ -30,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+      //Each button and text field takes the value from the id by linking this code to the xml code
         text = findViewById(R.id.textView);
         btn0 = findViewById(R.id.b0);
         btn1 = findViewById(R.id.b1);
