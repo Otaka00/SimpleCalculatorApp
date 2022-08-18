@@ -3,12 +3,12 @@ package com.ahmadossama.mycalculator;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.text.DecimalFormat;
 import static java.lang.Math.sqrt;
 import static java.lang.Math.abs;
 import static java.lang.Math.log;
@@ -20,9 +20,6 @@ import static java.lang.Math.abs;
 import static java.lang.Math.log10;
 
 
-
-import java.text.DecimalFormat;
-
 public class MainActivity extends AppCompatActivity {
 
     String op = "+";
@@ -31,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     Button btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7,btn8, btn9, addBtn, subBtn, multiplyBtn,
     divideBtn,dotBtn,equalBtn,clearBtn,plusMinusBtn,memoryPlus,memoryMinus,memoryRecall,memoryClear;
     ImageButton delBtn;
+    Button piBtn;
     TextView text;
     //3 decimal places as maximum format
     private static final DecimalFormat df = new DecimalFormat("0.000");
@@ -39,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-      //Each button and text field takes the value from the id by linking this code to the xml code
+        //Each button and text field takes the value from the id by linking this code to the xml code
         text = findViewById(R.id.textView);
         btn0 = findViewById(R.id.b0);
         btn1 = findViewById(R.id.b1);
@@ -64,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         memoryRecall =findViewById(R.id.MR);
         memoryClear =findViewById(R.id.MC);
         delBtn = findViewById(R.id.delete);
+        piBtn = findViewById(R.id.pi);
         memoryPlus.setOnClickListener(memory_listener);
         memoryMinus.setOnClickListener(memory_listener);
         memoryRecall.setOnClickListener(memoryRecall_listener);
@@ -78,6 +77,12 @@ public class MainActivity extends AppCompatActivity {
         btn7.setOnClickListener(num_listener);
         btn8.setOnClickListener(num_listener);
         btn9.setOnClickListener(num_listener);
+        piBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
         dotBtn.setOnClickListener(num_listener);
         plusMinusBtn.setOnClickListener(num_listener);
         addBtn.setOnClickListener(operation_listener);
@@ -225,6 +230,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case "/":
                         result = (Double.parseDouble(firstNum) / Double.parseDouble(secondNum));
+                        break;
+                    case "^":
+                        result = Math.pow(Double.parseDouble(firstNum), Double.parseDouble(secondNum));
                         break;
                 }
                 String s = result +"";
