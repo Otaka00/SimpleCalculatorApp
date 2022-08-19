@@ -1,9 +1,9 @@
 package com.ahmadossama.mycalculator;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -21,21 +21,23 @@ public class MainActivity extends AppCompatActivity {
     double result = 0.0,tempResult= 0.0, memory = 0.0;
     Button btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7,btn8, btn9,
            addBtn, subBtn, multiplyBtn,powerBtn,divideBtn,dotBtn,equalBtn,clearBtn,plusMinusBtn,
-           memoryPlus,memoryMinus,memoryRecall,memoryClear;
+           memoryPlus,memoryMinus,memoryRecall,memoryClear,binary,hexa;
     ImageButton delBtn;
     Button piBtn,expBtn;
     TextView text;
     //3 decimal places as maximum format
     private static final DecimalFormat df = new DecimalFormat("0.000");
     boolean isNew = true;
-    final MediaPlayer mp = MediaPlayer.create(MainActivity.this,R.raw.button_click);
+    MediaPlayer mp ;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //Define a media player object to hold the mp3 sound file
-//      final MediaPlayer mp = MediaPlayer.create(MainActivity.this,R.raw.button_click);
-    //Each button and text field takes the value from the id by linking this code to the xml code
+        mp = MediaPlayer.create(this,R.raw.button_click);
+    //Each button and text field takes the value from the id by linking this code to the xml layout
         text = findViewById(R.id.textView);
         btn0 = findViewById(R.id.b0);
         btn1 = findViewById(R.id.b1);
@@ -61,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
         memoryRecall =findViewById(R.id.MR);
         memoryClear =findViewById(R.id.MC);
         delBtn = findViewById(R.id.delete);
+        binary = findViewById(R.id.binary);
+        hexa = findViewById(R.id.hexa);
 //        piBtn = findViewById(R.id.pi);
 //        expBtn = findViewById(R.id.exponential);
 //        piBtn.setOnClickListener(value_listener);
@@ -86,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
         multiplyBtn.setOnClickListener(operation_listener);
         divideBtn.setOnClickListener(operation_listener);
         powerBtn.setOnClickListener(operation_listener);
-
         //Equal Button handler after finishing the equation
         equalBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -138,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
         delBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mp.start();
                 String currentVal = text.getText().toString();
                 //if text field is empty, do nothing and exit from the function
                 if (currentVal.equals("")) {
@@ -153,9 +157,49 @@ public class MainActivity extends AppCompatActivity {
         clearBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mp.start();
                 text.setText("");
                 isNew = true;
-                mp.start();
+            }
+        });
+        binary.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Boolean is_clicked = true;
+                String str = text.getText().toString();
+                if(str.contains(".")){
+                    String[] splitter = str.split("\\.");
+                    //The string taken is only the number before the decimal
+                    str = splitter[0];
+                }
+                int res = Integer.parseInt(str);
+                String binary = Integer.toBinaryString(res);
+                text.setText(binary);
+            }
+        });
+        hexa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String str = text.getText().toString();
+                if(str.equals("")||str.contains("2")||str.contains("3")||str.contains("4")
+  ||str.contains("5")||str.contains("6")||str.contains("7")||str.contains("8")||str.contains("9")){
+                    Toast.makeText(MainActivity.this,"Please enter a binary value",
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(str.contains(".")){
+                    String[] splitter = str.split("\\.");
+                    //The string taken is only the number before the decimal
+                    str = splitter[0];
+                }
+                if(str.equals("0")){
+                    text.setText("0");
+                    return;
+
+                }
+                int res = Integer.parseInt(str,2);
+                String decimal = Integer.toString(res);
+                text.setText(decimal);
             }
         });
     }
@@ -163,6 +207,7 @@ public class MainActivity extends AppCompatActivity {
     View.OnClickListener memory_listener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            mp.start();
             //if displayed text is empty, return without adding anything to memory
             if(text.getText().toString().equals("")){
                 return;
@@ -207,6 +252,7 @@ public class MainActivity extends AppCompatActivity {
     View.OnClickListener memoryRecall_listener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            mp.start();
             text.setText(memory+"");
             Toast.makeText(MainActivity.this,
                     memory +" is recalled from the memory",Toast.LENGTH_SHORT).show();
@@ -216,6 +262,7 @@ public class MainActivity extends AppCompatActivity {
     View.OnClickListener memoryClr_listener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            mp.start();
             memory = 0;
             Toast.makeText(MainActivity.this,
                     "Memory is cleared" ,Toast.LENGTH_SHORT).show();
@@ -226,6 +273,7 @@ public class MainActivity extends AppCompatActivity {
     View.OnClickListener operation_listener = new View.OnClickListener(){
         @Override
         public void onClick(View view) {
+            mp.start();
             Button opBtn = (Button) view;
             isNew = true;
             firstNum = text.getText().toString();
@@ -236,6 +284,7 @@ public class MainActivity extends AppCompatActivity {
     View.OnClickListener num_listener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            mp.start();
             Button mybtn = (Button) view;
             //If dot button is clicked at the start of the text field zero will not be cleared
             if(text.getText().toString().equals("0") && mybtn.equals(dotBtn)){

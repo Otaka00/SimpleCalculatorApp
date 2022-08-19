@@ -414,9 +414,10 @@
                     android:layout_marginLeft="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/button"
-                    android:backgroundTint="#007B8CE1"
+                    android:backgroundTint="#000000"
                     android:minHeight="48dp"
                     android:text="@string/equal"
+                    android:textColor="#FFFFFF"
                     android:textSize="18sp" />
 
             </LinearLayout>
