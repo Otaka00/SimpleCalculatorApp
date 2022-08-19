@@ -19,21 +19,22 @@ public class MainActivity extends AppCompatActivity {
     String op = "+";
     String firstNum ="";
     double result = 0.0,tempResult= 0.0, memory = 0.0;
-    Button btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7,btn8, btn9, addBtn, subBtn, multiplyBtn,
-            powerBtn,divideBtn,dotBtn,equalBtn,clearBtn,plusMinusBtn,
-            memoryPlus,memoryMinus,memoryRecall,memoryClear, converterBtn;
+    Button btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7,btn8, btn9,
+           addBtn, subBtn, multiplyBtn,powerBtn,divideBtn,dotBtn,equalBtn,clearBtn,plusMinusBtn,
+           memoryPlus,memoryMinus,memoryRecall,memoryClear;
     ImageButton delBtn;
     Button piBtn,expBtn;
     TextView text;
     //3 decimal places as maximum format
     private static final DecimalFormat df = new DecimalFormat("0.000");
     boolean isNew = true;
+    final MediaPlayer mp = MediaPlayer.create(MainActivity.this,R.raw.button_click);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //Define a media player object to hold the mp3 sound file
-      final MediaPlayer mp = MediaPlayer.create(this,R.raw.button_click);
+//      final MediaPlayer mp = MediaPlayer.create(MainActivity.this,R.raw.button_click);
     //Each button and text field takes the value from the id by linking this code to the xml code
         text = findViewById(R.id.textView);
         btn0 = findViewById(R.id.b0);
@@ -60,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
         memoryRecall =findViewById(R.id.MR);
         memoryClear =findViewById(R.id.MC);
         delBtn = findViewById(R.id.delete);
-        converterBtn = findViewById(R.id.converter);
 //        piBtn = findViewById(R.id.pi);
 //        expBtn = findViewById(R.id.exponential);
 //        piBtn.setOnClickListener(value_listener);
@@ -156,13 +156,6 @@ public class MainActivity extends AppCompatActivity {
                 text.setText("");
                 isNew = true;
                 mp.start();
-            }
-        });
-        converterBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, WelcomeActivity.class);
-                startActivity(intent);
             }
         });
     }

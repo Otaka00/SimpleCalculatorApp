@@ -11,10 +11,8 @@ import android.widget.TextView;
 
 public class WelcomeActivity extends AppCompatActivity {
 
-    private static int SPLASH_TIME_OUT= 3000;
-    TextView text1;
-    EditText edit1;
-    Button btn1;
+    private static int SPLASH_TIME_OUT= 2000;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
