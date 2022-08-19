@@ -217,6 +217,7 @@ public class MainActivity extends AppCompatActivity {
             if(text.getText().toString().equals("")){
                 return;
             }
+            //Casting view to button to get the text written on the screen which is M+ or M-
             Button btn = (Button)view;
             String command = btn.getText().toString();
             String displayText = text.getText().toString();
