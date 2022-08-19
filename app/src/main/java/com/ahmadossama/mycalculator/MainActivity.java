@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //Define a media player object to hold the mp3 sound file
       final MediaPlayer mp = MediaPlayer.create(this,R.raw.button_click);
     //Each button and text field takes the value from the id by linking this code to the xml code
         text = findViewById(R.id.textView);
@@ -90,8 +91,71 @@ public class MainActivity extends AppCompatActivity {
         multiplyBtn.setOnClickListener(operation_listener);
         divideBtn.setOnClickListener(operation_listener);
         powerBtn.setOnClickListener(operation_listener);
-        equalBtn.setOnClickListener(equal_listener);
-        delBtn.setOnClickListener(del_listener);
+
+        //Equal Button handler after finishing the equation
+        equalBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mp.start();
+                String secondNum = text.getText().toString();
+                if (firstNum.equals("") || op.equals("")){
+                    text.setText(secondNum + "");
+                    return; }
+                else {
+                    switch (op) {
+                        case "+":
+                            result = Double.parseDouble(firstNum) + Double.parseDouble(secondNum);
+                            break;
+                        case "-":
+                            result = Double.parseDouble(firstNum) - Double.parseDouble(secondNum);
+                            break;
+                        case "x":
+                            result = (Double.parseDouble(firstNum) * Double.parseDouble(secondNum));
+                            break;
+                        case "/":
+                            result = (Double.parseDouble(firstNum) / Double.parseDouble(secondNum));
+                            break;
+                        case "^":
+                            result = Math.pow(Double.parseDouble(firstNum), Double.parseDouble(secondNum));
+                            break;
+                    }
+                    String s = result +"";
+                    if(s.equals("Infinity")){
+                        //If result value is infinity, just print it and exit the function
+                        //Infinity value could not be rounded
+                        text.setText((result) + "");
+                        Toast.makeText(MainActivity.this, firstNum + " " + op + " " +
+                                secondNum + " : undefined", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    String[] splitter = s.split("\\.");
+                    int after = splitter[1].length();
+                    //Count number of decimal points in the result and print only 4 digits
+                    if(after > 3){
+                        text.setText(df.format(result) + "");
+                    }
+                    else text.setText((result) + "");
+                    Toast.makeText(MainActivity.this, firstNum + " " + op + " " + secondNum,
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        delBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mp.start();
+                String currentVal = text.getText().toString();
+                //if text field is empty, do nothing and exit from the function
+                if (currentVal.equals("")) {
+                    return;
+                }
+                else {
+                    // remove last character
+                    String newValue = currentVal.substring(0, currentVal.length() - 1);
+                    text.setText(newValue);
+                }
+            }
+        });
         clearBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -101,17 +165,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    View.OnClickListener value_listener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-           Button charBtn = (Button) view;
-            mp.start();
-            if (piBtn.equals(charBtn)) {
-                text.setText("3.1415926535897");
-            }
-            else text.setText("2.17182818284590452353602874713");
-        }
-    };
     //Adding and subtracting value from the memory
     View.OnClickListener memory_listener = new View.OnClickListener() {
         @Override
@@ -221,67 +274,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
     };
-    //Equal Button handler after finishing the equation
-    View.OnClickListener equal_listener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            String secondNum = text.getText().toString();
-            if (firstNum.equals("") || op.equals("")){
-                text.setText(secondNum + "");
-                return; }
-            else {
-                switch (op) {
-                    case "+":
-                        result = Double.parseDouble(firstNum) + Double.parseDouble(secondNum);
-                        break;
-                    case "-":
-                        result = Double.parseDouble(firstNum) - Double.parseDouble(secondNum);
-                        break;
-                    case "x":
-                        result = (Double.parseDouble(firstNum) * Double.parseDouble(secondNum));
-                        break;
-                    case "/":
-                        result = (Double.parseDouble(firstNum) / Double.parseDouble(secondNum));
-                        break;
-                    case "^":
-                        result = Math.pow(Double.parseDouble(firstNum), Double.parseDouble(secondNum));
-                        break;
-                }
-                String s = result +"";
-                if(s.equals("Infinity")){
-                    //If result value is infinity, just print it and exit the function
-                    //Infinity value could not be rounded
-                    text.setText((result) + "");
-                    Toast.makeText(MainActivity.this, firstNum + " " + op + " " +
-                                    secondNum + " : undefined", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                String[] splitter = s.split("\\.");
-                int after = splitter[1].length();
-                //Count number of decimal points in the result and print only 4 digits
-                if(after > 3){
-                    text.setText(df.format(result) + "");
-                }
-                else text.setText((result) + "");
-                Toast.makeText(MainActivity.this, firstNum + " " + op + " " + secondNum,
-                        Toast.LENGTH_SHORT).show();
-            }
-        }
-    };
-    View.OnClickListener del_listener = new View.OnClickListener() {
-        @Override public void onClick(View view) {
-            String currentVal = text.getText().toString();
-            //if text field is empty, do nothing and exit from the function
-             if (currentVal.equals("")) {
-                 return;
-             }
-             else {
-                 // remove last character
-                 String newValue = currentVal.substring(0, currentVal.length() - 1);
-                 text.setText(newValue);
-             }
-        }
-    };
     public void piExp(View view) {
         Button charBtn = (Button) view;
         if (piBtn.equals(charBtn)) {
@@ -289,4 +281,14 @@ public class MainActivity extends AppCompatActivity {
         }
         else text.setText("2.17182818284590452353602874713");
     }
+    View.OnClickListener value_listener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Button charBtn = (Button) view;
+            if (piBtn.equals(charBtn)) {
+                text.setText("3.1415926535897");
+            }
+            else text.setText("2.17182818284590452353602874713");
+        }
+    };
 }
