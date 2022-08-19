@@ -1,5 +1,7 @@
 package com.ahmadossama.mycalculator;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -36,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+      final MediaPlayer mp = MediaPlayer.create(this,R.raw.button_click);
     //Each button and text field takes the value from the id by linking this code to the xml code
         text = findViewById(R.id.textView);
         btn0 = findViewById(R.id.b0);
@@ -64,6 +67,8 @@ public class MainActivity extends AppCompatActivity {
         delBtn = findViewById(R.id.delete);
 //        piBtn = findViewById(R.id.pi);
 //        expBtn = findViewById(R.id.exponential);
+//        piBtn.setOnClickListener(value_listener);
+//        expBtn.setOnClickListener(value_listener);
         memoryPlus.setOnClickListener(memory_listener);
         memoryMinus.setOnClickListener(memory_listener);
         memoryRecall.setOnClickListener(memoryRecall_listener);
@@ -78,8 +83,6 @@ public class MainActivity extends AppCompatActivity {
         btn7.setOnClickListener(num_listener);
         btn8.setOnClickListener(num_listener);
         btn9.setOnClickListener(num_listener);
-//        piBtn.setOnClickListener(value_listener);
-//        expBtn.setOnClickListener(value_listener);
         dotBtn.setOnClickListener(num_listener);
         plusMinusBtn.setOnClickListener(num_listener);
         addBtn.setOnClickListener(operation_listener);
@@ -94,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 text.setText("");
                 isNew = true;
+                mp.start();
             }
         });
     }
@@ -101,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
            Button charBtn = (Button) view;
+            mp.start();
             if (piBtn.equals(charBtn)) {
                 text.setText("3.1415926535897");
             }
@@ -111,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
     View.OnClickListener memory_listener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            //if displayed text is empty, return without adding nothing to memory
+            //if displayed text is empty, return without adding anything to memory
             if(text.getText().toString().equals("")){
                 return;
             }
@@ -149,7 +154,6 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this,
                         memory +" is subtracted from the memory",Toast.LENGTH_SHORT).show();
             }
-
         }
     };
     //Retrieve the stored value in the memory

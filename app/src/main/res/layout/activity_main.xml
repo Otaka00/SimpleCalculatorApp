@@ -44,8 +44,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
-                    android:background="@drawable/button"
-                    android:backgroundTint="#7B8CE1"
+                    android:background="@drawable/button2"
                     android:text="@string/MR"
                     android:textSize="18sp" />
 
@@ -56,8 +55,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
-                    android:background="@drawable/button"
-                    android:backgroundTint="#7B8CE1"
+                    android:background="@drawable/button2"
                     android:text="@string/MAdd"
                     android:textSize="18sp" />
 
@@ -68,8 +66,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
-                    android:background="@drawable/button"
-                    android:backgroundTint="#7B8CE1"
+                    android:background="@drawable/button2"
                     android:text="@string/MSubtract"
                     android:textSize="18sp" />
 
@@ -80,8 +77,8 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
-                    android:background="@drawable/button"
-                    android:backgroundTint="#7B8CE1"
+                    android:background="@drawable/button2"
+                    android:focusableInTouchMode="false"
                     android:text="@string/MC"
                     android:textSize="18sp" />
 
@@ -101,8 +98,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
-                    android:background="@drawable/button"
-                    android:backgroundTint="#7B8CE1"
+                    android:background="@drawable/button2"
                     android:text="@string/clear"
                     android:textSize="18sp" />
 
@@ -113,8 +109,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
-                    android:background="@drawable/button"
-                    android:backgroundTint="#7B8CE1"
+                    android:background="@drawable/button2"
                     android:text="@string/plusMinus"
                     android:textSize="18sp" />
 
@@ -125,8 +120,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
-                    android:background="@drawable/button"
-                    android:backgroundTint="#7B8CE1"
+                    android:background="@drawable/button2"
                     app:srcCompat="@android:drawable/ic_input_delete"
                     tools:ignore="SpeakableTextPresentCheck" />
 
@@ -137,8 +131,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
-                    android:background="@drawable/button"
-                    android:backgroundTint="#7B8CE1"
+                    android:background="@drawable/button2"
                     android:text="@string/divide"
                     android:textSize="18sp" />
 
@@ -191,8 +184,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
-                    android:background="@drawable/button"
-                    android:backgroundTint="#7B8CE1"
+                    android:background="@drawable/button2"
                     android:text="x"
                     android:textAllCaps="false"
                     android:textSize="18sp" />
@@ -246,8 +238,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
-                    android:background="@drawable/button"
-                    android:backgroundTint="#7B8CE1"
+                    android:background="@drawable/button2"
                     android:text="-"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -299,8 +290,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
-                    android:background="@drawable/button"
-                    android:backgroundTint="#7B8CE1"
+                    android:background="@drawable/button2"
                     android:text="@string/add"
                     android:textSize="18sp" />
 
@@ -320,8 +310,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
-                    android:background="@drawable/button"
-                    android:backgroundTint="#7B8CE1"
+                    android:background="@drawable/button2"
                     android:minHeight="48dp"
                     android:text="@string/dot"
                     android:textSize="18sp" />
@@ -345,8 +334,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
-                    android:background="@drawable/button"
-                    android:backgroundTint="#7B8CE1"
+                    android:background="@drawable/button2"
                     android:text="^"
                     android:textSize="18sp" />
 
@@ -357,9 +345,9 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
-                    android:background="@drawable/button"
-                    android:backgroundTint="#000000"
+                    android:background="@drawable/equal_button"
                     android:minHeight="48dp"
+                    android:state_pressed="true"
                     android:text="@string/equal"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp" />
