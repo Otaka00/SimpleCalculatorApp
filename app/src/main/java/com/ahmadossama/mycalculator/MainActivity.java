@@ -164,6 +164,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 mp.start();
                 String str = text.getText().toString();
+                if(str.equals("")){
+                    Toast.makeText(MainActivity.this,"Please enter a decimal value",
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if(str.contains(".")){
                     String[] splitter = str.split("\\.");
                     //The string taken is only the number before the decimal
