@@ -169,6 +169,13 @@ public class MainActivity extends AppCompatActivity {
                     //The string taken is only the number before the decimal
                     str = splitter[0];
                 }
+                //Maximum number of digits that can be converted to binary is 9
+                if(str.length() > 9){
+                    text.setText(str);
+                    Toast.makeText(MainActivity.this,
+              "Please enter a no of digits < 9",Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 int res = Integer.parseInt(str);
                 String binary = Integer.toBinaryString(res);
                 text.setText(binary);
