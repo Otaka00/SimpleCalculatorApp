@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     double result = 0.0,tempResult= 0.0, memory = 0.0;
     Button btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7,btn8, btn9,
            addBtn, subBtn, multiplyBtn,powerBtn,divideBtn,dotBtn,equalBtn,clearBtn,plusMinusBtn,
-           memoryPlus,memoryMinus,memoryRecall,memoryClear,binary,hexa;
+           memoryPlus,memoryMinus,memoryRecall,memoryClear,dectoBinary,binarytoDec;
     ImageButton delBtn;
     Button piBtn,expBtn;
     TextView text;
@@ -63,8 +63,8 @@ public class MainActivity extends AppCompatActivity {
         memoryRecall =findViewById(R.id.MR);
         memoryClear =findViewById(R.id.MC);
         delBtn = findViewById(R.id.delete);
-        binary = findViewById(R.id.binary);
-        hexa = findViewById(R.id.hexa);
+        dectoBinary = findViewById(R.id.binary);
+        binarytoDec = findViewById(R.id.hexa);
 //        piBtn = findViewById(R.id.pi);
 //        expBtn = findViewById(R.id.exponential);
 //        piBtn.setOnClickListener(value_listener);
@@ -162,10 +162,10 @@ public class MainActivity extends AppCompatActivity {
                 isNew = true;
             }
         });
-        binary.setOnClickListener(new View.OnClickListener() {
+        dectoBinary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Boolean is_clicked = true;
+                mp.start();
                 String str = text.getText().toString();
                 if(str.contains(".")){
                     String[] splitter = str.split("\\.");
@@ -177,9 +177,10 @@ public class MainActivity extends AppCompatActivity {
                 text.setText(binary);
             }
         });
-        hexa.setOnClickListener(new View.OnClickListener() {
+        binarytoDec.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mp.start();
                 String str = text.getText().toString();
                 if(str.equals("")||str.contains("2")||str.contains("3")||str.contains("4")
   ||str.contains("5")||str.contains("6")||str.contains("7")||str.contains("8")||str.contains("9")){
@@ -192,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
                     //The string taken is only the number before the decimal
                     str = splitter[0];
                 }
-                if(str.equals("0")){
+                if(str.equals("")){
                     text.setText("0");
                     return;
 
