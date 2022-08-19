@@ -3,15 +3,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.text.DecimalFormat;
-
-import static java.lang.Math.abs;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -64,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         memoryClear =findViewById(R.id.MC);
         delBtn = findViewById(R.id.delete);
         dectoBinary = findViewById(R.id.binary);
-        binarytoDec = findViewById(R.id.hexa);
+        binarytoDec = findViewById(R.id.dec);
 //        piBtn = findViewById(R.id.pi);
 //        expBtn = findViewById(R.id.exponential);
 //        piBtn.setOnClickListener(value_listener);
@@ -319,21 +316,21 @@ public class MainActivity extends AppCompatActivity {
             }
     };
 
-    public void piExp(View view) {
-        Button charBtn = (Button) view;
-        if (piBtn.equals(charBtn)) {
-            text.setText("3.1415926535897");
-        }
-        else text.setText("2.17182818284590452353602874713");
-    }
-    View.OnClickListener value_listener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            Button charBtn = (Button) view;
-            if (piBtn.equals(charBtn)) {
-                text.setText("3.1415926535897");
-            }
-            else text.setText("2.17182818284590452353602874713");
-        }
-    };
+//    public void piExp(View view) {
+//        Button charBtn = (Button) view;
+//        if (piBtn.equals(charBtn)) {
+//            text.setText("3.1415926535897");
+//        }
+//        else text.setText("2.17182818284590452353602874713");
+//    }
+//    View.OnClickListener value_listener = new View.OnClickListener() {
+//        @Override
+//        public void onClick(View view) {
+//            Button charBtn = (Button) view;
+//            if (piBtn.equals(charBtn)) {
+//                text.setText("3.1415926535897");
+//            }
+//            else text.setText("2.17182818284590452353602874713");
+//        }
+//    };
 }
