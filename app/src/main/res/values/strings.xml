@@ -22,6 +22,7 @@
     <string name="add">+</string>
     <string name="subtract">-</string>
     <string name="multiply">x</string>
+    <string name="converter">Unit Converter</string>
     <string name="divide">/</string>
     <string name="clear">C</string>
 </resources>

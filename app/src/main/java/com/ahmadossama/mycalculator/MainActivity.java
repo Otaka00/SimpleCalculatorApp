@@ -1,6 +1,7 @@
 package com.ahmadossama.mycalculator;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
@@ -9,15 +10,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.text.DecimalFormat;
-import static java.lang.Math.sqrt;
+
 import static java.lang.Math.abs;
-import static java.lang.Math.log;
-import static java.lang.Math.exp;
-import static java.lang.Math.toRadians;
-import static java.lang.Math.toDegrees;
-import static java.lang.Math.sin;
-import static java.lang.Math.abs;
-import static java.lang.Math.log10;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -27,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     double result = 0.0,tempResult= 0.0, memory = 0.0;
     Button btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7,btn8, btn9, addBtn, subBtn, multiplyBtn,
             powerBtn,divideBtn,dotBtn,equalBtn,clearBtn,plusMinusBtn,
-            memoryPlus,memoryMinus,memoryRecall,memoryClear;
+            memoryPlus,memoryMinus,memoryRecall,memoryClear, converterBtn;
     ImageButton delBtn;
     Button piBtn,expBtn;
     TextView text;
@@ -66,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         memoryRecall =findViewById(R.id.MR);
         memoryClear =findViewById(R.id.MC);
         delBtn = findViewById(R.id.delete);
+        converterBtn = findViewById(R.id.converter);
 //        piBtn = findViewById(R.id.pi);
 //        expBtn = findViewById(R.id.exponential);
 //        piBtn.setOnClickListener(value_listener);
@@ -143,7 +138,6 @@ public class MainActivity extends AppCompatActivity {
         delBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mp.start();
                 String currentVal = text.getText().toString();
                 //if text field is empty, do nothing and exit from the function
                 if (currentVal.equals("")) {
@@ -162,6 +156,13 @@ public class MainActivity extends AppCompatActivity {
                 text.setText("");
                 isNew = true;
                 mp.start();
+            }
+        });
+        converterBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, WelcomeActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -274,6 +275,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
     };
+
     public void piExp(View view) {
         Button charBtn = (Button) view;
         if (piBtn.equals(charBtn)) {
